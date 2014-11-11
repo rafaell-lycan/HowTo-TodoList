@@ -7,16 +7,30 @@ describe("Todo.TaskInput", function() {
     taskInput = new Todo.TaskInput(input);
   });
 
+  //Verifica se o enter foi pressionado
   it("triggers enter event", function() {
-    event = $.Event("keydown");
-    event.which = 13;
+    event = $.Event("keydown"); //Definindo novo evento
+    event.which = 13; // Set valor 13 na tecla (Enter Key)
 
-    taskInput.html.on("keydown", callback);
-    console.log(event);
+    taskInput.html.on("enter", callback); // Set event listenet no Spy
+    // console.log(event);
     input.trigger(event);
 
-    // expect(callback).toHaveBeenCalledWith("some task");
-    expect(callback).toHaveBeenCalled();
+    expect(callback).wasCalled();
+  });
+
+  //Verifica se alguma outra tecla foi pressionada
+  it("skip enter event - press another key", function() {
+    event = $.Event("keydown"); //Definindo novo evento
+    event.which = 27; // Set valor 27 na tecla (Esc Key)
+    taskInput.html.on("enter", callback); // Set event listenet no Spy
+    input.trigger(event);
+
+    expect(callback).wasNotCalled();
+  });
+
+  it("emits input value", function() {
+
   });
 
 });

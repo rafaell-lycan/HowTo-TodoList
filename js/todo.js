@@ -17,7 +17,10 @@
       this.html.find('.task-input')
     );
 
-    // this.taskInput.enter();
+    //Gerenciador de criação de tasks
+    this.taskManager = new Todo.TaskManager(
+      this.taskInput
+    );
 
     //Inicializa o loader
     this.loader.init();

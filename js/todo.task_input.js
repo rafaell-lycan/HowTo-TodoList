@@ -3,40 +3,27 @@
       this.html = html;
 
       this.addEventListners();
-
    };
 
+   // Todo.TaskInput.prototype.on = function(event, callback){
+
+   //    console.log(event, callback);
+   //    this.html.on("enter", callback);
+   // };
+
    Todo.TaskInput.prototype.addEventListners = function() {
-      this.html.on("keydown", $.proxy(this, "enter"));
+      this.html.on("keydown", $.proxy(this, "onKeyDown"));
    }
 
-   Todo.TaskInput.prototype.enter = function(event){
-      if( (event.keyCode || event.which) != 13){
+   Todo.TaskInput.prototype.onKeyDown = function(event){
+      if( (event.keyCode || event.which) !== 13){
          return true;
       }
 
       event.preventDefault();
       event.stopPropagation();
-      console.log(event.target.value);
-      // return event.target.delegateTarget;
+      // this.html.trigger('enter', event.target.value);
+      // console.log(event.target.value);
    }
 
-
-   /**
-   var html = document.getElementsByTagName('input')[0];
-
-   //Validate if <enter> button is pressed (keydown event)
-   Todo.taskInput = function(e, html){
-      if(e.keyCode !== 13){
-         return false;
-      }
-      var manager = new Todo.taskManager({title: html.value, status: "pendente"});
-
-      manager.isValid();
-   }
-
-   html.onkeydown = function(e){
-      Todo.taskInput(e, this);
-   };
-   */
 })(Todo);
